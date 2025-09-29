@@ -5,7 +5,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   const { url } = context;
   const { pathname } = new URL(url);
   if (pathname === '/') {
-    return context.redirect('/es/');
+    return context.redirect('/es', 307);
   }
   return next();
 };
