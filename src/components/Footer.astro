@@ -18,7 +18,7 @@ import { translations } from "@lib/i18n";
           const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
           const t = translations[lang];
           const year = new Date().getFullYear();
-          return <>&copy; {year} | {SITE.NAME} &mdash; {t.footer.copyright}</>;
+          return <>&copy; {year} | {SITE.NAME}</>;
         })()}
       </div>
       <div class="flex flex-wrap gap-1 items-center">
