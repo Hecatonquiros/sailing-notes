@@ -7,12 +7,35 @@ type Props = {
   underline?: boolean;
 }
 
-const { href, external, underline = true, ...rest } = Astro.props;
+const { href, external, underline = true, ...rest } = Astro.props as Props;
+
+// Determine locale from current path
+const currentPath = Astro.url.pathname;
+const pathLocale = currentPath.startsWith('/en') ? '/en' : currentPath.startsWith('/es') ? '/es' : '/es';
+
+// Detect external or special links if `external` not explicitly provided
+const isExplicitExternal = external ?? false;
+const isAutoExternal = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:') || href.startsWith('tel:');
+const isExternal = isExplicitExternal || isAutoExternal;
+
+// Build localized href for internal absolute links
+let finalHref = href;
+if (!isExternal) {
+  if (href === '/') {
+    finalHref = `${pathLocale}/`;
+  } else if (href.startsWith('/')) {
+    // If href already includes a locale, keep as is; otherwise prefix
+    finalHref = href.startsWith('/en') || href.startsWith('/es') ? href : `${pathLocale}${href}`;
+  } else {
+    // relative path; make it absolute under current locale
+    finalHref = `${pathLocale}/${href}`;
+  }
+}
 ---
 
 <a 
-  href={href} 
-  target={ external ? "_blank" : "_self" } 
+  href={finalHref} 
+  target={ isExternal ? "_blank" : "_self" } 
   class={cn("inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out", underline && "underline underline-offset-2")}
   {...rest}>
   <slot/>

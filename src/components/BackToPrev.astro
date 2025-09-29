@@ -3,10 +3,12 @@ type Props = {
   href: string;
 }
 
-const { href } = Astro.props;
+const { href } = Astro.props as Props;
+const pathLocale = Astro.url.pathname.startsWith('/en') ? '/en' : Astro.url.pathname.startsWith('/es') ? '/es' : '/es';
+const finalHref = href.startsWith('/en') || href.startsWith('/es') ? href : `${pathLocale}${href}`;
 ---
  
-<a href={href} class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+<a href={finalHref} class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     viewBox="0 0 24 24"

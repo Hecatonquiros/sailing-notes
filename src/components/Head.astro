@@ -40,6 +40,11 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<!-- Hreflang cross links -->
+<link rel="alternate" hreflang="es" href={`${Astro.site}/es${Astro.url.pathname.replace(/^\/en/, "")}`} />
+<link rel="alternate" hreflang="en" href={`${Astro.site}/en${Astro.url.pathname.replace(/^\/es/, "")}`} />
+<link rel="alternate" hreflang="x-default" href={`${Astro.site}/es${Astro.url.pathname.replace(/^\/(es|en)/, "")}`} />
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />

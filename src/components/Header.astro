@@ -2,6 +2,7 @@
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
+import { translations } from "@lib/i18n";
 ---
 
 <header>
@@ -13,21 +14,23 @@ import { SITE } from "@consts";
         </div>
       </Link>
       <nav class="flex gap-1">
-        <Link href="/blog">
-          blog
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/work">
-          work
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/projects">
-          projects
-        </Link>
+        {(() => {
+          const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+          const t = translations[lang];
+          return <>
+            <Link href="/blog">
+              {t.nav.blog}
+            </Link>
+            <span>/</span>
+            <Link href="/projects">
+              {t.nav.projects}
+            </Link>
+            <span class="mx-2">|</span>
+            <Link href={Astro.url.pathname.startsWith('/en') ? Astro.url.pathname.replace('/en', '/es') : Astro.url.pathname.replace('/es', '/en')}>
+              {t.switchLang}
+            </Link>
+          </>;
+        })()}
       </nav>
     </div>
   </Container>
