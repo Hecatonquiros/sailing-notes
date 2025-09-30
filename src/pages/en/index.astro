@@ -6,6 +6,7 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, METADATA, SOCIALS } from "@consts";
+import { translations } from "@lib/i18n";
 
 const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft && post.data.lang === 'en')
@@ -17,37 +18,26 @@ const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
+const t = translations.en;
+
 ---
 
 <PageLayout title={METADATA.home.en.TITLE} description={METADATA.home.en.DESCRIPTION}>
   <Container>
     <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span> 
+      {t.home.greeting} <span class="text-xl">👋🏻</span> 
     </h4>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers. 
-            I am an even more lightweight version of my popular theme
-            <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              Astro Sphere
-            </Link>.
-            I have a lighthouse scores of 100 across the board for performance, 
-            accesibility, best practices and SEO.
+            {t.home.intro1}
           </p>
           <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown 
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and 
-            system/os theme preferences out of the box.
+            {t.home.intro2}
           </p>
           <p class="animate">
-            Visit
-            <Link href="https://github.com/markhorn-dev/astro-nano" aria-label="Astro Nano on Github" external>
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify. 
+            {t.home.intro3}
           </p>
         </article>
       </section>
@@ -55,10 +45,10 @@ const projects = (await getCollection("projects"))
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
+            {t.home.latestPosts}
           </h5>
           <Link href="/blog">
-            See all posts
+            {t.home.seeAllPosts}
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -73,10 +63,10 @@ const projects = (await getCollection("projects"))
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
+            {t.home.recentProjects}
           </h5>
           <Link href="/projects">
-            See all projects
+            {t.home.seeAllProjects}
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -90,11 +80,11 @@ const projects = (await getCollection("projects"))
 
       <section class="animate space-y-4">
         <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
+          {t.home.letsConnect}
         </h5>
         <article>
           <p>
-            If you’d like to connect —whether to share an idea, ask something, or just say hello— you can find me on social media or drop me an email.
+            {t.home.connectText}
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">
