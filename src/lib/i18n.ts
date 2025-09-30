@@ -39,7 +39,7 @@ export const translations = {
       copyright: 'All rights reserved.'
     },
     home: {
-      greeting: 'Hi, I\'m Héctor 👋🏻',
+      greeting: 'Hi, I\'m Héctor',
       intro1: 'Developer who builds stuff that works. I like clean code and fast websites.',
       intro2: 'I work with whatever tech gets the job done, as long as it doesn\'t break on Mondays.',
       intro3: 'Debugging is like being a detective in a crime movie where you\'re also the murderer.',
