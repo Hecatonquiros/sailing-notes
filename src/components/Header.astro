@@ -3,6 +3,14 @@ import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 import { translations } from "@lib/i18n";
+import { getLanguageSwitchURL } from "@lib/utils";
+
+// Props para pasar información del contenido actual
+interface Props {
+  relatedSlug?: string;
+}
+
+const { relatedSlug } = Astro.props;
 ---
 
 <header>
@@ -17,16 +25,18 @@ import { translations } from "@lib/i18n";
         {(() => {
           const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
           const t = translations[lang];
+          const switchURL = getLanguageSwitchURL(Astro.url.pathname, lang, relatedSlug);
+          
           return <>
-            <Link href="/blog">
+            <Link href={`/${lang}/blog`}>
               {t.nav.blog}
             </Link>
             <span>/</span>
-            <Link href="/projects">
+            <Link href={`/${lang}/projects`}>
               {t.nav.projects}
             </Link>
             <span class="mx-2">|</span>
-            <Link href={Astro.url.pathname.startsWith('/en') ? Astro.url.pathname.replace('/en', '/es') : Astro.url.pathname.replace('/es', '/en')}>
+            <Link href={switchURL}>
               {t.switchLang}
             </Link>
           </>;
