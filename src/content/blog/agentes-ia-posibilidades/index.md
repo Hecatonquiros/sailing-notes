@@ -1,7 +1,7 @@
 ---
-title: "Agentes de IA: Guía Completa de Posibilidades y Aplicaciones en 2025"
+title: "Agentes de IA: Guía Completa de Posibilidades y Aplicaciones"
 description: "Descubre qué son los agentes de IA, sus tipos, capacidades y las infinitas posibilidades que ofrecen para automatizar tareas, mejorar la productividad y transformar tu forma de trabajar."
-date: "2025-01-15"
+date: "2025-10-14"
 lang: "es"
 ---
 
