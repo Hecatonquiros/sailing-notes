@@ -49,21 +49,27 @@ export function getLanguageSwitchURL(currentPath: string, currentLang: 'es' | 'e
     return `/${targetLang}/`;
   }
   
-  // Si estamos en blog o projects index
+  // Si estamos en blog, projects o findings index
   if (currentPath === '/es/blog' || currentPath === '/en/blog') {
     return `/${targetLang}/blog`;
   }
   if (currentPath === '/es/projects' || currentPath === '/en/projects') {
     return `/${targetLang}/projects`;
   }
+  if (currentPath === '/es/findings' || currentPath === '/en/findings') {
+    return `/${targetLang}/findings`;
+  }
   
-  // Si estamos en un post/proyecto específico y tiene relacionado
+  // Si estamos en un post/proyecto/hallazgo específico y tiene relacionado
   if (relatedSlug) {
     if (currentPath.includes('/blog/')) {
       return `/${targetLang}/blog/${relatedSlug}`;
     }
     if (currentPath.includes('/projects/')) {
       return `/${targetLang}/projects/${relatedSlug}`;
+    }
+    if (currentPath.includes('/findings/')) {
+      return `/${targetLang}/findings/${relatedSlug}`;
     }
   }
   
@@ -73,6 +79,9 @@ export function getLanguageSwitchURL(currentPath: string, currentLang: 'es' | 'e
   }
   if (currentPath.includes('/projects/')) {
     return `/${targetLang}/projects`;
+  }
+  if (currentPath.includes('/findings/')) {
+    return `/${targetLang}/findings`;
   }
   
   // Fallback general: home

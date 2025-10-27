@@ -6,6 +6,7 @@ export const translations = {
     nav: {
       blog: 'blog',
       projects: 'proyectos',
+      findings: 'hallazgos',
     },
     footer: {
       copyright: 'Todos los derechos reservados.'
@@ -19,11 +20,14 @@ export const translations = {
       seeAllPosts: 'Ver todas las entradas',
       recentProjects: 'Proyectos recientes',
       seeAllProjects: 'Ver todos los proyectos',
+      recentFindings: 'Hallazgos recientes',
+      seeAllFindings: 'Ver todos los hallazgos',
       backToTop: 'Volver arriba',
       letsConnect: 'Conectemos',
       connectText: 'Si quieres conectar —ya sea para compartir una idea, preguntar algo o simplemente saludar— puedes encontrarme en redes sociales o enviarme un correo.',
       backToBlog: 'Volver al blog',
-      backToProjects: 'Volver a proyectos'
+      backToProjects: 'Volver a proyectos',
+      backToFindings: 'Volver a hallazgos'
     },
     readingTime: 'min de lectura'
   },
@@ -34,6 +38,7 @@ export const translations = {
     nav: {
       blog: 'blog',
       projects: 'projects',
+      findings: 'findings',
     },
     footer: {
       copyright: 'All rights reserved.'
@@ -47,11 +52,14 @@ export const translations = {
       seeAllPosts: 'See all posts',
       recentProjects: 'Recent projects',
       seeAllProjects: 'See all projects',
+      recentFindings: 'Recent findings',
+      seeAllFindings: 'See all findings',
       backToTop: 'Back to top',
       letsConnect: 'Let\'s Connect',
       connectText: 'If you\'d like to connect —whether to share an idea, ask something, or just say hello— you can find me on social media or drop me an email.',
       backToBlog: 'Back to blog',
-      backToProjects: 'Back to projects'
+      backToProjects: 'Back to projects',
+      backToFindings: 'Back to findings'
     },
     readingTime: 'min read'
   },

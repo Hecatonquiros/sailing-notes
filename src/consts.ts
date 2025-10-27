@@ -40,6 +40,20 @@ export const METADATA = {
       KEYWORDS: "projects, development, ideas, experiments, portfolio",
       AUTHOR: "Héctor Gutiérrez"
     }
+  },
+  findings: {
+    es: {
+      TITLE: "Hallazgos",
+      DESCRIPTION: "Cosas que descubro navegando. Reflexiones, trucos, atajos y aprendizajes del día a día.",
+      KEYWORDS: "hallazgos, reflexiones, trucos, aprendizajes, productividad, descubrimientos",
+      AUTHOR: "Héctor Gutiérrez"
+    },
+    en: {
+      TITLE: "Findings",
+      DESCRIPTION: "Things I discover while sailing. Reflections, tricks, shortcuts and daily learnings.",
+      KEYWORDS: "findings, reflections, tricks, learnings, productivity, discoveries",
+      AUTHOR: "Héctor Gutiérrez"
+    }
   }
 };
 import type { Site, Metadata, Socials } from "@types";
@@ -49,6 +63,7 @@ export const SITE: Site = {
   EMAIL: "hectorgutialo@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_FINDINGS_ON_HOMEPAGE: 3,
 };
 
 export const SOCIALS: Socials = [
