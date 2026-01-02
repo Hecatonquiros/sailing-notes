@@ -10,6 +10,7 @@ import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
 import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 import { SITE } from "@consts";
 
 interface Props {
@@ -73,6 +74,9 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 <meta property="twitter:image:alt" content={title} />
 
 <ClientRouter  />
+
+<!-- Vercel Web Analytics -->
+<Analytics />
 
 <!-- RSS Link -->
 <link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
