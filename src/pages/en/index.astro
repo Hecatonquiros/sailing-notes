@@ -2,35 +2,28 @@
 import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
 import { SITE, METADATA, SOCIALS } from "@consts";
 import { translations } from "@lib/i18n";
+import { formatDate } from "@lib/utils";
 
 const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft && post.data.lang === 'en')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft && project.data.lang === 'en')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .filter(post => !post.data.draft && post.data.lang === 'en');
 
 const findings = (await getCollection("findings"))
-  .filter(finding => !finding.data.draft && finding.data.lang === 'en')
+  .filter(finding => !finding.data.draft && finding.data.lang === 'en');
+
+const recent = [...blog, ...findings]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_FINDINGS_ON_HOMEPAGE);
+  .slice(0, 3);
 
 const t = translations.en;
-
 ---
 
 <PageLayout title={METADATA.home.en.TITLE} description={METADATA.home.en.DESCRIPTION}>
   <Container>
     <h4 class="animate font-semibold text-black dark:text-white">
-      {t.home.greeting} <span class="text-xl">👋🏻</span> 
+      {t.home.greeting}
     </h4>
     <div class="space-y-16">
       <section>
@@ -41,63 +34,33 @@ const t = translations.en;
           <p class="animate">
             {t.home.intro2}
           </p>
-          <p class="animate">
-            {t.home.intro3}
-          </p>
         </article>
       </section>
 
       <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            {t.home.latestPosts}
-          </h5>
-          <Link href="/blog">
-            {t.home.seeAllPosts}
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {blog.map(post => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            {t.home.recentProjects}
-          </h5>
-          <Link href="/projects">
-            {t.home.seeAllProjects}
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {projects.map(project => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            {t.home.recentFindings}
-          </h5>
-          <Link href="/findings">
-            {t.home.seeAllFindings}
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {findings.map(finding => (
-            <li>
-              <ArrowCard entry={finding} />
-            </li>
-          ))}
+        <h5 class="font-semibold text-black dark:text-white">
+          {t.home.latestNotes}
+        </h5>
+        <ul class="flex flex-col">
+          {recent.map(item => {
+            const typeLabel = item.collection === 'blog' ? t.home.typeBlog : t.home.typeFinding;
+            const href = `/en/${item.collection}/${item.slug}`;
+            return (
+              <li>
+                <a href={href} class="group flex flex-wrap items-baseline gap-x-3 gap-y-0.5 py-2.5 border-b border-black/5 dark:border-white/5 hover:text-black dark:hover:text-white transition-colors duration-200">
+                  <span class="text-sm text-black/40 dark:text-white/40 tabular-nums shrink-0">
+                    {formatDate(item.data.date)}
+                  </span>
+                  <span class="text-xs uppercase tracking-wide text-black/30 dark:text-white/30 shrink-0">
+                    {typeLabel}
+                  </span>
+                  <span class="group-hover:underline underline-offset-2">
+                    {item.data.title}
+                  </span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </section>
 

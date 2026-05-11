@@ -16,15 +16,19 @@ const projects = (await getCollection("projects"))
       <div class="animate font-semibold text-black dark:text-white">
         Projects
       </div>
-      <ul class="animate flex flex-col gap-4">
-        {
-          projects.map((project) => (
+      {projects.length > 0 ? (
+        <ul class="animate flex flex-col gap-4">
+          {projects.map((project) => (
             <li>
               <ArrowCard entry={project}/>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <p class="animate text-black/50 dark:text-white/50">
+          No projects published yet. They'll show up here as I build them, break them, or learn something from them.
+        </p>
+      )}
     </div>
   </Container>
 </PageLayout>
