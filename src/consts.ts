@@ -1,14 +1,14 @@
 export const METADATA = {
   home: {
     es: {
-      TITLE: "Inicio",
-      DESCRIPTION: "Bitácora pública sobre desarrollo, proyectos y aprendizajes. Minimalista, sin publicidad.",
+      TITLE: "Bitácora de programación, micro-SaaS y quant",
+      DESCRIPTION: "Bitácora personal sobre programación, micro-SaaS, quant, ideas sueltas y el proceso de aprender construyendo. Sin anuncios.",
       KEYWORDS: "blog, desarrollo, proyectos, aprendizaje, transparencia, minimalismo",
       AUTHOR: "Héctor Gutiérrez"
     },
     en: {
-      TITLE: "Home",
-      DESCRIPTION: "Open journal on building, projects, and learning. Minimalist, ad-free.",
+      TITLE: "Personal log on coding, micro-SaaS and quant",
+      DESCRIPTION: "A personal log on code, micro-SaaS, quant trading, loose ideas and the process of learning by building. No ads.",
       KEYWORDS: "blog, development, projects, learning, transparency, minimalism",
       AUTHOR: "Héctor Gutiérrez"
     }

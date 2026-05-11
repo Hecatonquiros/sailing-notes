@@ -19,7 +19,15 @@ interface Props {
   image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Normalize path: strip trailing slash so canonical is consistent with how Vercel serves URLs
+const normalizedPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonicalURL = new URL(normalizedPath, Astro.site);
+
+// Compute localized paths for hreflang using the normalized path
+const basePath = normalizedPath.replace(/^\/(es|en)/, "") || "/";
+const hreflangBase = basePath === "/" ? "" : basePath;
+const esURL = new URL(`/es${hreflangBase}`, Astro.site);
+const enURL = new URL(`/en${hreflangBase}`, Astro.site);
 
 const { title, description, image = "/og-image.png" } = Astro.props;
 ---
@@ -41,10 +49,10 @@ const { title, description, image = "/og-image.png" } = Astro.props;
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Hreflang cross links -->
-<link rel="alternate" hreflang="es" href={`${Astro.site}/es${Astro.url.pathname.replace(/^\/en/, "")}`} />
-<link rel="alternate" hreflang="en" href={`${Astro.site}/en${Astro.url.pathname.replace(/^\/es/, "")}`} />
-<link rel="alternate" hreflang="x-default" href={`${Astro.site}/es${Astro.url.pathname.replace(/^\/(es|en)/, "")}`} />
+<!-- Hreflang cross links (including self-reference, as required by Google) -->
+<link rel="alternate" hreflang="es" href={esURL} />
+<link rel="alternate" hreflang="en" href={enURL} />
+<link rel="alternate" hreflang="x-default" href={esURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
